@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Subasta</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- HEADER sticky con logo y acciones -->
+  <header>
+    <div class="logo">
+      <img src="/assets/logo.png" alt="Logo" class="logo-img">
+      <span class="logo-text">Tienda Subastas</span>
+    </div>
+    <div class="header-acciones">
+      <a href="/" class="btn-volver">← Volver</a>
+      <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Detalles del producto -->
+    <header id="detalle-header">
+      <h1 id="titulo"></h1>
+      <p id="descripcion"></p>
+    </header>
+
+    <!-- Galería de imágenes o placeholder -->
+    <section id="galeria">
+      <div id="imagenes-producto"></div>
+    </section>
+
+    <!-- Mensaje de estado (Subasta cerrada) -->
+    <section id="mensaje-estado">
+      <!-- Se rellenará dinámicamente si aplica -->
+    </section>
+
+    <!-- Detalles adicionales -->
+    <section id="detalles">
+      <p><strong>Precio inicial:</strong> €<span id="precio-inicial"></span></p>
+      <p><strong>Vendedor:</strong> <span id="vendedor"></span></p>
+      <p><strong>Finaliza:</strong> <span id="expiracion"></span></p>
+      <p><strong>Estado:</strong> <span id="estado"></span></p>
+    </section>
+
+    <!-- Listado de pujas -->
+    <section id="pujas">
+      <h2>Pujas</h2>
+      <ul id="lista-pujas"></ul>
+    </section>
+
+    <!-- Formulario de nueva puja -->
+    <section id="nueva-puja">
+      <h2>Hacer una puja</h2>
+      <form id="form-puja">
+        <label>
+          Cantidad (€):
+          <input type="number" id="cantidad" required min="0.01" step="0.01">
+        </label>
+        <button type="submit">Pujar</button>
+      </form>
+      <p id="error-puja" style="color:red;"></p>
+    </section>
+  </main>
+
+  <!-- FOOTER simple -->
+  <footer>
+    <p>&copy; 2025 Tienda de Subastas. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="js/producto.js"></script>
+</body>
+</html>

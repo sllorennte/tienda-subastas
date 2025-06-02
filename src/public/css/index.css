@@ -1,0 +1,181 @@
+/* ==========================================
+   index.css: Estilos específicos para index.html
+   ========================================== */
+
+/* 1) Variables generales y reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-principal:       #1d4ed8;    /* Azul profundo */
+  --color-principal-hover: #1e40af;    /* Azul oscuro */
+  --color-secundario:      #6b7280;    /* Gris medio */
+  --color-acento:          #f59e0b;    /* Amarillo/naranja */
+  --color-fondo:           #f3f4f6;    /* Gris muy claro */
+  --color-texto:           #111827;    /* Casi negro */
+  --color-blanco:          #ffffff;
+
+  --radio-bordes:          8px;
+  --sombra-suave:          0 2px 8px rgba(0, 0, 0, 0.1);
+  --sombra-interactiva:    0 4px 12px rgba(0, 0, 0, 0.15);
+
+  --espacio-pequeno:       0.5rem;
+  --espacio-medio:         1rem;
+  --espacio-grande:        1.5rem;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+/* 2) HEADER: contenedor principal */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-blanco);
+  padding: var(--espacio-pequeno) var(--espacio-medio);
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* 2.1) Sección izquierda: enlaces de navegación */
+.nav-left {
+  display: flex;
+  gap: var(--espacio-medio);
+}
+
+.nav-left a {
+  color: var(--color-texto);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.nav-left a:hover {
+  color: var(--color-principal);
+}
+
+/* 2.2) Logo centrado */
+.logo-container {
+  flex: 1;
+  text-align: center;
+}
+
+.logo-img {
+  height: 100px;
+}
+
+/* 2.3) Sección derecha: iconos */
+.nav-right {
+  display: flex;
+  gap: var(--espacio-medio);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--color-principal-hover);
+}
+
+/* 3) MAIN CONTENT: contenedor general */
+.main-content {
+  margin-top: var(--espacio-grande);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-grande);
+}
+
+/* 3.1) Product Slider: tres columnas de igual tamaño */
+.product-slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espacio-medio);
+  padding: 0 var(--espacio-medio);
+}
+
+/* Cada “slider-item” */
+.slider-item {
+  background-color: var(--color-blanco);
+  border-radius: var(--radio-bordes);
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slider-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-interactiva);
+}
+
+/* Imagen dentro del slider */
+.slider-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 3.2) Content Area: sección vacía para “lo que venga después” */
+.content-area {
+  flex: 1;
+  min-height: 300px; /* deja un espacio visible para contenido futuro */
+  background-color: #e5e7eb; /* gris claro para que se note el área */
+  margin: 0 var(--espacio-medio);
+  border-radius: var(--radio-bordes);
+  padding: var(--espacio-medio);
+}
+
+/* 4) Responsive Breakpoints */
+
+/* Para pantallas medianas (tablet) */
+@media (max-width: 768px) {
+  .nav-left {
+    display: none; /* oculta enlaces para ahorrar espacio; podrías poner un “hamburger” más adelante */
+  }
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 480px) {
+  .main-header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espacio-medio);
+  }
+
+  .logo-container {
+    order: 1;
+    width: 100%;
+  }
+
+  .nav-right {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .content-area {
+    min-height: 200px;
+  }
+}

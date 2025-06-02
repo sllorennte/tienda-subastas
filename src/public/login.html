@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-left">
+      <h1 class="brand-login">bidd<span>able</span></h1>
+      <p class="subtitulo-login">Inicia sesión para acceder a tu cuenta</p>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card">
+        <div class="avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <form id="form-login">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="usuario" placeholder="Usuario" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="contrasena" placeholder="Contraseña" required />
+          </div>
+          <div class="buttons">
+            <button type="submit">Iniciar sesión</button>
+            <button type="button" class="cancel">Cancelar</button>
+          </div>
+          <div class="extra-links">
+            <a href="#">Registrarse</a> / <a href="#">Recuperar contraseña</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/login.js"></script>
+</body>
+</html>
