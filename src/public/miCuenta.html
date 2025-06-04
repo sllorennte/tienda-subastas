@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mi Cuenta - Tienda de Subastas</title>
+
+  <!-- Google Font Inter -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Estilos generales e index-specific -->
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/miCuenta.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="main-header">
+    <nav class="nav-left">
+      <a href="#">Enlace 1</a>
+      <a href="#">Enlace 2</a>
+      <a href="#">Enlace 3</a>
+    </nav>
+
+    <div class="logo-container">
+      <a href="index.html"><img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img" /></a>
+    </div>
+
+    <div class="nav-right">
+      <button class="icon-btn" id="btn-buscar" title="Buscar">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="icon-btn" id="btn-carrito" title="Carrito">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+      <button class="icon-btn" id="btn-usuario" title="Perfil">
+        <i class="fas fa-user"></i>
+      </button>
+      <button id="btn-logout" class="icon-btn" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="perfil-contenedor">
+    <aside class="menu-lateral">
+      <nav>
+        <ul>
+          <li>
+            <button class="menu-btn active" data-section="pujas-activas">
+              Mis Pujas Activas
+            </button>
+          </li>
+          <li>
+            <button class="menu-btn" data-section="pujas-creadas">
+              Mis Pujas Creadas
+            </button>
+          </li>
+          <li>
+            <button class="menu-btn" data-section="configuracion">
+              Configuración de Cuenta
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="contenido-principal">
+      <section id="pujas-activas" class="seccion-activa">
+        <h2>Mis Pujas Activas</h2>
+        <div id="lista-pujas-activas" class="lista-pujas"></div>
+      </section>
+
+      <section id="pujas-creadas" class="seccion-oculta">
+        <h2>Mis Pujas Creadas</h2>
+        <div id="lista-pujas-creadas" class="lista-pujas"></div>
+      </section>
+
+      <section id="configuracion" class="seccion-oculta">
+        <h2>Configuración de Cuenta</h2>
+        <form id="form-configuracion">
+          <label for="username-config">Nombre de usuario:</label>
+          <input
+            type="text"
+            id="username-config"
+            name="username"
+            required
+            autocomplete="username"
+          />
+
+          <label for="email-config">Correo electrónico:</label>
+          <input
+            type="email"
+            id="email-config"
+            name="email"
+            required
+            autocomplete="email"
+          />
+
+          <label for="password-config">Cambiar contraseña:</label>
+          <input
+            type="password"
+            id="password-config"
+            name="password"
+            placeholder="Nueva contraseña"
+            autocomplete="new-password"
+          />
+
+          <button type="submit" class="btn-guardar">Guardar cambios</button>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/miCuenta.js"></script>
+</body>
+</html>

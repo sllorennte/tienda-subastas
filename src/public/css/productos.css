@@ -1,0 +1,226 @@
+/* ==========================================
+   productos.css: estilos específicos
+   ========================================== */
+
+/* 1) Reset rápido y base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-fondo);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 2) HEADER ya está en index.css; no repetimos */
+
+/* 3) Contenedor principal de la página */
+.productos-contenedor {
+  flex: 1;
+  max-width: 1200px;
+  margin: 2rem auto 1rem;
+  padding: 0 var(--espacio-medio);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-grande);
+}
+
+/* 4) Zona de filtros */
+.filtros {
+  background-color: var(--color-blanco);
+  padding: var(--espacio-medio);
+  border-radius: var(--radio-bordes);
+  box-shadow: var(--sombra-suave);
+}
+
+.filtros h2 {
+  margin-bottom: var(--espacio-medio);
+  color: var(--color-principal);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.filtros form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-medio);
+  align-items: flex-end;
+}
+
+.filtro-item {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filtro-item label {
+  font-size: 0.9rem;
+  color: var(--color-texto);
+  font-weight: 500;
+}
+
+.filtro-item input,
+.filtro-item select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radio-bordes);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.filtro-item input:focus,
+.filtro-item select:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+.filtro-botones {
+  display: flex;
+  gap: var(--espacio-pequeno);
+  margin-top: var(--espacio-pequeno);
+}
+
+.btn-aplicar,
+.btn-limpiar {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radio-bordes);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-aplicar {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+
+.btn-aplicar:hover {
+  background-color: var(--color-principal-hover);
+}
+
+.btn-limpiar {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+.btn-limpiar:hover {
+  background-color: #4b515a; /* un gris más oscuro */
+}
+
+/* 5) Listado de productos: grid responsive */
+.lista-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--espacio-medio);
+  margin-top: var(--espacio-medio);
+}
+
+/* 5.1) Tarjeta individual de producto */
+.producto-card {
+  background-color: var(--color-blanco);
+  border: 1px solid #ddd;
+  border-radius: var(--radio-bordes);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.producto-card:hover {
+  box-shadow: var(--sombra-interactiva);
+}
+
+.producto-card .thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.producto-card .contenido {
+  flex: 1;
+  padding: var(--espacio-medio);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.producto-card .contenido h2 {
+  font-size: 1.1rem;
+  color: var(--color-principal);
+  margin-bottom: 0.25rem;
+}
+
+.producto-card .contenido p {
+  font-size: 0.94rem;
+  color: var(--color-texto);
+  flex: 1;
+}
+
+.producto-card .contenido .precio {
+  font-weight: 600;
+  color: #1d3557;
+}
+
+.producto-card .contenido a {
+  margin-top: var(--espacio-pequeno);
+  text-decoration: none;
+  color: var(--color-blanco);
+  background: var(--color-principal);
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  border-radius: var(--radio-bordes);
+  transition: background-color 0.2s ease;
+}
+
+.producto-card .contenido a:hover {
+  background-color: var(--color-principal-hover);
+}
+
+/* 6) Mensaje “sin productos” */
+.sin-productos {
+  text-align: center;
+  padding: var(--espacio-grande);
+  font-size: 1.15rem;
+  color: var(--color-secundario);
+}
+
+/* 7) FOOTER específico de productos */
+.productos-footer {
+  margin-top: auto;
+  background: var(--color-blanco);
+  text-align: center;
+  padding: var(--espacio-medio) 0;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: var(--color-secundario);
+}
+
+/* 8) Responsive */
+@media (max-width: 768px) {
+  .filtros form {
+    flex-direction: column;
+  }
+
+  .filtro-item {
+    width: 100%;
+  }
+
+  .filtro-botones {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .lista-productos {
+    grid-template-columns: 1fr;
+    gap: var(--espacio-pequeno);
+  }
+}

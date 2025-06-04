@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      alert('✅ Producto creado con éxito');
+      alert('Producto creado con éxito');
       window.location.href = '/';
     } catch (err) {
       console.error(err);

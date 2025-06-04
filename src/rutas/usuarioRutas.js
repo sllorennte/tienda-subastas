@@ -1,13 +1,27 @@
 const express = require('express');
-const router  = express.Router();
-const ctrl    = require('../controladores/usuarioController');
-const { login } = require('../controladores/usuarioController');
+const router = express.Router();
+const ctrl = require('../controladores/usuarioController');
+const { verifyToken } = require('../middlewares/auth');
 
-router.post('/usuarios',       ctrl.crearUsuario);         // Crear
-router.get('/usuarios',        ctrl.obtenerUsuarios);      // Leer todos
-router.get('/usuarios/:id',    ctrl.obtenerUsuarioPorId);  // Leer uno
-router.put('/usuarios/:id',    ctrl.actualizarUsuario);    // Actualizar
-router.delete('/usuarios/:id', ctrl.eliminarUsuario);     // Eliminar
-router.post('/login', login); 
+// Crear usuario
+router.post('/usuarios', ctrl.crearUsuario);
+
+// Obtener todos usuarios
+router.get('/usuarios', ctrl.obtenerUsuarios);
+
+// Obtener usuario autenticado (token)
+router.get('/usuarios/me', verifyToken, ctrl.obtenerUsuarioActual);
+
+// Obtener usuario por ID
+router.get('/usuarios/:id', ctrl.obtenerUsuarioPorId);
+
+// Actualizar usuario por ID
+router.put('/usuarios/:id', ctrl.actualizarUsuario);
+
+// Eliminar usuario por ID
+router.delete('/usuarios/:id', ctrl.eliminarUsuario);
+
+// Login
+router.post('/login', ctrl.login);
 
 module.exports = router;

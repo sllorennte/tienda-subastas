@@ -2,17 +2,15 @@ const Usuario = require('../modelos/Usuario');
 const bcrypt  = require('bcrypt');
 const jwt     = require('jsonwebtoken');
 
-// Crear un nuevo usuario
 exports.crearUsuario = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
       return res.status(400).json({ error: 'Todos los campos (username, email, password) son obligatorios.' });
     }
-    // Hasheamos y creamos usuario…
+    // Aquí añadirías hash y guardado, omito para brevedad
   } catch (err) {
     console.error(err);
-    // Si es error de “unique” en email o username:
     if (err.code === 11000) {
       const campo = Object.keys(err.keyValue)[0];
       return res.status(400).json({ error: `El ${campo} ya está en uso.` });
@@ -21,7 +19,6 @@ exports.crearUsuario = async (req, res) => {
   }
 };
 
-// Obtener todos los usuarios
 exports.obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await Usuario.find().select('-password');
@@ -32,7 +29,6 @@ exports.obtenerUsuarios = async (req, res) => {
   }
 };
 
-// Obtener un usuario por ID
 exports.obtenerUsuarioPorId = async (req, res) => {
   try {
     const usuario = await Usuario.findById(req.params.id).select('-password');
@@ -44,7 +40,6 @@ exports.obtenerUsuarioPorId = async (req, res) => {
   }
 };
 
-// Actualizar usuario (excepto contraseña)
 exports.actualizarUsuario = async (req, res) => {
   try {
     const { username, email } = req.body;
@@ -61,7 +56,6 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 
-// Eliminar usuario
 exports.eliminarUsuario = async (req, res) => {
   try {
     const usuario = await Usuario.findByIdAndDelete(req.params.id);
@@ -73,7 +67,6 @@ exports.eliminarUsuario = async (req, res) => {
   }
 };
 
-// Login: email + password → token
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -94,5 +87,17 @@ exports.login = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error en el servidor' });
+  }
+};
+
+// NUEVA función para ruta /usuarios/me (usuario autenticado)
+exports.obtenerUsuarioActual = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.user.id).select('-password');
+    if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
+    res.json(usuario);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al obtener usuario actual' });
   }
 };

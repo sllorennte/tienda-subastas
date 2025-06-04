@@ -1,14 +1,10 @@
-// public/js/main.js
-
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Verificar token (mantiene la lógica de redirección si no hay token)
   const token = localStorage.getItem('token');
   if (!token) {
     window.location.href = '/login.html';
     return;
   }
 
-  // 2. Si en tu header tienes un botón de logout, puedes activarlo aquí
   const btnLogout = document.getElementById('btn-logout');
   if (btnLogout) {
     btnLogout.addEventListener('click', () => {
@@ -17,11 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Inyectar dinámicamente el buscador, la lista de productos y paginación
-  // -------------------------------------------------------------------------
   const contentArea = document.querySelector('.content-area');
   contentArea.innerHTML = `
-    <!-- Sección de búsqueda -->
     <section id="busqueda" class="busqueda-contenedor">
       <div class="busqueda-input-wrapper">
         <svg class="icono-lupa" xmlns="http://www.w3.org/2000/svg"
@@ -32,41 +25,32 @@ document.addEventListener('DOMContentLoaded', () => {
         <input type="text" id="search-input" placeholder="Buscar por título o descripción...">
       </div>
       <button id="search-btn">Buscar</button>
+      <button id="btn-mis-productos" style="margin-left: 1rem;">Mis productos</button>
     </section>
 
-    <!-- Listado de productos -->
-    <section id="lista-productos" class="lista-productos">
-      <!-- Aquí se insertan dinámicamente las tarjetas -->
-    </section>
+    <section id="lista-productos" class="lista-productos"></section>
 
-    <!-- Paginación -->
-    <nav id="paginacion" class="paginacion-nav">
-      <!-- Botones de páginas se generan dinámicamente -->
-    </nav>
+    <nav id="paginacion" class="paginacion-nav"></nav>
   `;
 
-  // 4. Variables globales para paginación y búsqueda
   let currentPage = 1;
-  const limit = 5; // productos por página
+  const limit = 5;
   let currentSearch = '';
+  let mostrarSoloMios = false;
 
-  // 5. Punteros a nuevos elementos inyectados
   const listaProductos = document.getElementById('lista-productos');
   const paginacionNav = document.getElementById('paginacion');
   const searchInput = document.getElementById('search-input');
   const searchBtn = document.getElementById('search-btn');
+  const btnMisProductos = document.getElementById('btn-mis-productos');
 
-  // 6. Función para cargar productos (misma lógica que antes)
   async function cargarProductos() {
     try {
-      const params = new URLSearchParams({
-        page: currentPage,
-        limit: limit
-      });
-      if (currentSearch) {
-        params.set('search', currentSearch);
-      }
-      const url = `/api/productos?${params.toString()}`;
+      const params = new URLSearchParams({ page: currentPage, limit: limit });
+      if (currentSearch) params.set('search', currentSearch);
+
+      // Cambiar URL según si mostrar solo productos propios
+      const url = mostrarSoloMios ? '/api/productos/mios' : `/api/productos?${params.toString()}`;
 
       const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -83,10 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 7. Renderizar productos dentro de #lista-productos
   function mostrarProductos(productos) {
-    listaProductos.innerHTML = ''; // limpiar
-
+    listaProductos.innerHTML = '';
     if (productos.length === 0) {
       listaProductos.innerHTML = '<p class="sin-productos">No se encontraron productos.</p>';
       return;
@@ -114,11 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Generar controles de paginación en #paginacion
   function generarPaginacion({ page, limit, totalPages }) {
-    paginacionNav.innerHTML = ''; // limpiar
+    paginacionNav.innerHTML = '';
 
-    // Botón “Anterior”
     const prevBtn = document.createElement('button');
     prevBtn.textContent = 'Anterior';
     prevBtn.disabled = page <= 1;
@@ -131,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     paginacionNav.appendChild(prevBtn);
 
-    // Botones numerados de página
     for (let i = 1; i <= totalPages; i++) {
       const pageBtn = document.createElement('button');
       pageBtn.textContent = i;
@@ -147,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
       paginacionNav.appendChild(pageBtn);
     }
 
-    // Botón “Siguiente”
     const nextBtn = document.createElement('button');
     nextBtn.textContent = 'Siguiente';
     nextBtn.disabled = page >= totalPages;
@@ -161,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     paginacionNav.appendChild(nextBtn);
   }
 
-  // 9. Eventos de búsqueda
   searchBtn.addEventListener('click', () => {
     currentSearch = searchInput.value.trim();
     currentPage = 1;
@@ -175,6 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 10. Carga inicial de productos
+  btnMisProductos.addEventListener('click', () => {
+    mostrarSoloMios = !mostrarSoloMios;
+    btnMisProductos.textContent = mostrarSoloMios ? 'Ver todos' : 'Mis productos';
+    currentPage = 1;
+    cargarProductos();
+  });
+
   cargarProductos();
 });

@@ -1,0 +1,185 @@
+/* ==============================================
+   misPujas.css: Estilos específicos para misPujas.html
+   ============================================== */
+
+/* --- Hereda las variables de :root definidas en index.css --- */
+
+/* Contenedor principal */
+.pujas-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.pujas-titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-principal);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Mensaje cuando no hay pujas */
+.sin-pujas {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-secundario);
+  margin-top: 2rem;
+}
+
+/* Lista vertical de tarjetas */
+.lista-pujas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Cada tarjeta de puja */
+.puja-card {
+  background: var(--color-blanco);
+  border: 1px solid #d0d7e0;
+  border-radius: var(--radio-bordes);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.puja-card:hover {
+  box-shadow: var(--sombra-interactiva);
+}
+
+/* Contenido interno de la tarjeta */
+.puja-detalle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.puja-detalle h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-principal);
+  margin: 0;
+}
+
+.puja-detalle p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.25rem 0;
+}
+
+.puja-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.puja-fecha {
+  font-size: 0.85rem;
+  color: var(--color-secundario);
+}
+
+/* Estado y precio inicial */
+.puja-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+/* Botones “Editar” / “Eliminar” */
+.puja-acciones {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-editar,
+.btn-eliminar,
+.btn-guardar-edit,
+.btn-cancelar-edit {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radio-bordes);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Botón Edición */
+.btn-editar {
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+}
+.btn-editar:hover {
+  background-color: #d97706;
+}
+
+/* Botón Eliminar */
+.btn-eliminar {
+  background-color: #dc2626;
+  color: var(--color-blanco);
+}
+.btn-eliminar:hover {
+  background-color: #b91c1c;
+}
+
+/* Botón “Guardar” edición */
+.btn-guardar-edit {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+.btn-guardar-edit:hover {
+  background-color: var(--color-principal-hover);
+}
+
+/* Botón “Cancelar” edición */
+.btn-cancelar-edit {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+.btn-cancelar-edit:hover {
+  background-color: #5a646c;
+}
+
+/* Input inline para editar cantidad */
+.input-editar {
+  padding: 0.4rem 0.75rem;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  width: 100px;
+  transition: border-color 0.2s ease;
+}
+.input-editar:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+/* Footer */
+.footer-simple {
+  text-align: center;
+  padding: 1.5rem 0;
+  background: var(--color-blanco);
+  color: var(--color-secundario);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .puja-detalle {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .puja-acciones {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}

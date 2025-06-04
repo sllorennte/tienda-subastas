@@ -10,17 +10,17 @@
 }
 
 :root {
-  --color-principal:       #1d4ed8;    /* Azul profundo */
-  --color-principal-hover: #1e40af;    /* Azul oscuro */
-  --color-secundario:      #6b7280;    /* Gris medio */
-  --color-acento:          #f59e0b;    /* Amarillo/naranja */
-  --color-fondo:           #f3f4f6;    /* Gris muy claro */
-  --color-texto:           #111827;    /* Casi negro */
+  --color-principal:       #1d3557;    /* Azul oscuro profundo (como "bidd" del logo) */
+  --color-principal-hover: #457b9d;    /* Azul medio (como "able" del logo) */
+  --color-secundario:      #6c757d;    /* Gris oscuro/medio */
+  --color-acento:          #f59e0b;    /* Amarillo/naranja (puedes usar para acentos o highlights) */
+  --color-fondo:           #d3d3d3;    /* Gris claro de fondo (como en login) */
+  --color-texto:           #1a1a1a;    /* Negro muy oscuro para texto */
   --color-blanco:          #ffffff;
 
   --radio-bordes:          8px;
-  --sombra-suave:          0 2px 8px rgba(0, 0, 0, 0.1);
-  --sombra-interactiva:    0 4px 12px rgba(0, 0, 0, 0.15);
+  --sombra-suave:          0 2px 8px rgba(0, 0, 0, 0.15);
+  --sombra-interactiva:    0 4px 12px rgba(0, 0, 0, 0.25);
 
   --espacio-pequeno:       0.5rem;
   --espacio-medio:         1rem;
@@ -28,7 +28,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--color-fondo);
   color: var(--color-texto);
   line-height: 1.6;
@@ -39,12 +39,35 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--color-blanco);
+  background-color: var(--color-principal);
   padding: var(--espacio-pequeno) var(--espacio-medio);
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-principal-hover);
   position: sticky;
   top: 0;
   z-index: 100;
+  color: var(--color-blanco);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  color: var(--color-blanco);
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--color-principal-hover);
+}
+
+.icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 /* 2.1) Sección izquierda: enlaces de navegación */
@@ -54,15 +77,15 @@ body {
 }
 
 .nav-left a {
-  color: var(--color-texto);
+  color: var(--color-blanco);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 1rem;
   transition: color 0.2s ease;
 }
 
 .nav-left a:hover {
-  color: var(--color-principal);
+  color: var(--color-principal-hover);
 }
 
 /* 2.2) Logo centrado */
@@ -73,25 +96,13 @@ body {
 
 .logo-img {
   height: 100px;
+  filter: brightness(0) invert(1); /* Blanco para contraste en fondo azul */
 }
 
 /* 2.3) Sección derecha: iconos */
 .nav-right {
   display: flex;
   gap: var(--espacio-medio);
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  color: var(--color-texto);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.icon-btn:hover {
-  color: var(--color-principal-hover);
 }
 
 /* 3) MAIN CONTENT: contenedor general */
@@ -141,7 +152,7 @@ body {
 .content-area {
   flex: 1;
   min-height: 300px; /* deja un espacio visible para contenido futuro */
-  background-color: #e5e7eb; /* gris claro para que se note el área */
+  background-color: #f0f4f8; /* muy claro, neutro */
   margin: 0 var(--espacio-medio);
   border-radius: var(--radio-bordes);
   padding: var(--espacio-medio);

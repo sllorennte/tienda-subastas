@@ -6,12 +6,11 @@ exports.crearProducto = async (req, res) => {
       titulo,
       descripcion,
       precioInicial,
-      imagenes,        // string con nombres separados por comas
+      imagenes,
       vendedor,
       fechaExpiracion
     } = req.body;
 
-    // Validaciones (idem al caso manual)
     if (!titulo || precioInicial == null || !vendedor || !fechaExpiracion) {
       return res.status(400).json({
         error: 'Título, precio inicial, vendedor y fecha de expiración son obligatorios.'
@@ -22,7 +21,6 @@ exports.crearProducto = async (req, res) => {
       return res.status(400).json({ error: 'Fecha de expiración inválida o ya pasada.' });
     }
 
-    // Procesar campo "imagenes" como antes
     let listaImagenes = [];
     if (imagenes && typeof imagenes === 'string') {
       listaImagenes = imagenes
@@ -59,45 +57,30 @@ exports.crearProducto = async (req, res) => {
   }
 };
 
-/**
- * Obtener productos con paginación y búsqueda.
- * Query params:
- *   - page: página actual (default 1)
- *   - limit: ítems por página (default 10)
- *   - search: cadena a buscar en título o descripción (opcional)
- */
 exports.obtenerProductos = async (req, res) => {
   try {
-    // 1. Leer parámetros de consulta
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.max(parseInt(req.query.limit) || 10, 1);
     const search = req.query.search ? req.query.search.trim() : '';
 
-    // 2. Construir filtro
     const filtro = {};
     if (search) {
-      // Búsqueda insensible en título o descripción
       filtro.$or = [
         { titulo: { $regex: search, $options: 'i' } },
         { descripcion: { $regex: search, $options: 'i' } }
       ];
     }
 
-    // 3. Contar total de documentos que cumplen el filtro
     const totalItems = await Producto.countDocuments(filtro);
-
-    // 4. Calcular saltar (skip) y total de páginas
     const totalPages = Math.ceil(totalItems / limit);
     const skip = (page - 1) * limit;
 
-    // 5. Consultar productos con skip/limit, poblando vendedor
     const productos = await Producto.find(filtro)
       .populate('vendedor', 'username email')
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
 
-    // 6. Devolver JSON con metadatos y array de productos
     res.json({
       metadata: {
         page,
@@ -130,7 +113,6 @@ exports.actualizarProducto = async (req, res) => {
     const datos = (({ titulo, descripcion, precioInicial, imagenes, fechaExpiracion, estado }) =>
       ({ titulo, descripcion, precioInicial, imagenes, fechaExpiracion, estado }))(req.body);
 
-    // Procesar campo "imagenes" si viene como string
     if (datos.imagenes && typeof datos.imagenes === 'string') {
       let lista = datos.imagenes
         .split(',')
@@ -174,5 +156,32 @@ exports.eliminarProducto = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error al eliminar producto' });
+  }
+};
+
+// NUEVA función para productos propios
+exports.obtenerProductosMios = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.max(parseInt(req.query.limit) || 10, 1);
+    const skip = (page - 1) * limit;
+
+    const totalItems = await Producto.countDocuments({ vendedor: userId });
+    const totalPages = Math.ceil(totalItems / limit);
+
+    const productos = await Producto.find({ vendedor: userId })
+      .populate('vendedor', 'username email')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.json({
+      metadata: { page, limit, totalPages, totalItems },
+      productos
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al obtener productos propios' });
   }
 };

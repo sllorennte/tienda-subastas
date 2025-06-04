@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mis Pujas – Tienda de Subastas</title>
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome (para iconos) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <!-- Paleta global (index.css) -->
+  <link rel="stylesheet" href="css/index.css" />
+
+  <!-- Estilos específicos de Mis Pujas -->
+  <link rel="stylesheet" href="css/misPujas.css" />
+</head>
+<body>
+  <!-- HEADER compartido -->
+  <header class="main-header">
+    <nav class="nav-left">
+      <a href="index.html">Inicio</a>
+      <a href="misPujas.html" class="active">Mis Pujas</a>
+      <a href="miCuenta.html">Mi Cuenta</a>
+    </nav>
+
+    <div class="logo-container">
+      <a href="index.html"><img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img" /></a>
+    </div>
+
+    <div class="nav-right">
+      <button class="icon-btn" id="btn-buscar" title="Buscar">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="icon-btn" id="btn-carrito" title="Carrito">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+      <button class="icon-btn" id="btn-mi-cuenta" title="Mi Cuenta" onclick="location.href='miCuenta.html'">
+        <i class="fas fa-user-circle"></i>
+      </button>
+      <button class="icon-btn" id="btn-logout" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="pujas-container">
+    <h1 class="pujas-titulo">Mis Pujas</h1>
+
+    <!-- Mensaje cuando no haya pujas -->
+    <p id="sin-pujas" class="sin-pujas" style="display: none;">
+      No has realizado ninguna puja todavía.
+    </p>
+
+    <!-- Aquí se inyectan las tarjetas de puja -->
+    <div id="lista-pujas" class="lista-pujas"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-simple">
+    <p>&copy; 2025 Tienda de Subastas. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script de manejo -->
+  <script src="js/misPujas.js"></script>
+</body>
+</html>

@@ -20,26 +20,31 @@
 <body>
   <!-- HEADER -->
   <header class="main-header">
-    <nav class="nav-left">
-      <a href="#">Enlace 1</a>
-      <a href="#">Enlace 2</a>
-      <a href="#">Enlace 3</a>
-    </nav>
+  <nav class="nav-left">
+    <a href="productos.html">Productos</a>
+    <a href="misPujas.html">Mis Pujas</a>
+    <!-- Tercer enlace cambiado a “Mis Productos” -->
+    <a href="misProductos.html">Mis Productos</a>
+  </nav>
 
-    <div class="logo-container">
-      <img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img">
-    </div>
+  <div class="logo-container">
+    <a href="index.html"><img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img" /></a>
+  </div>
 
-    <div class="nav-right">
-      <!-- Botones de iconos (buscar, carrito, usuario) -->
-      <button class="icon-btn" id="btn-buscar"><i class="fas fa-search"></i></button>
-      <button class="icon-btn" id="btn-carrito"><i class="fas fa-shopping-cart"></i></button>
-      <button class="icon-btn" id="btn-usuario"><i class="fas fa-user"></i></button>
-      <!-- Si quieres un botón de Cerrar sesión, podrías añadirlo aquí:
-      <button id="btn-logout" class="icon-btn"><i class="fas fa-sign-out-alt"></i></button>
-      -->
-    </div>
-  </header>
+  <div class="nav-right">
+    <!-- Botones con imágenes -->
+    <button class="icon-btn" id="btn-buscar" title="Buscar">
+      <img src="uploads/buscar.png" alt="Buscar" class="icon-img" />
+    </button>
+    <button class="icon-btn" id="btn-carrito" title="Carrito">
+      <img src="uploads/carrito.png" alt="Carrito" class="icon-img" />
+    </button>
+    <button class="icon-btn" id="btn-mi-cuenta" title="Mi Cuenta" onclick="location.href='miCuenta.html'">
+      <img src="uploads/miCuenta.png" alt="Mi Cuenta" class="icon-img" />
+    </button>
+  </div>
+</header>
+
 
   <!-- MAIN CONTENT -->
   <main class="main-content">

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mis Productos - Tienda Subastas</title>
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <!-- Estilos específicos para esta página -->
+  <link rel="stylesheet" href="css/misProductos.css" />
+</head>
+<body>
+  <!-- HEADER (igual que en otras páginas) -->
+  <header class="main-header">
+    <div class="logo-container">
+      <a href="index.html"><img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img" /></a>
+      <span class="logo-text">Tienda Subastas</span>
+    </div>
+
+    <div class="header-actions">
+      <a href="/" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+      <a href="/misProductos.html" class="btn-mis-productos active">
+        <i class="fas fa-box"></i> Mis Productos
+      </a>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="mis-productos-container">
+      <div class="cabecera-seccion">
+        <h1>Mis Productos</h1>
+        <a href="/crearProducto.html" class="btn-crear-producto">
+          <i class="fas fa-plus"></i> Nuevo Producto
+        </a>
+      </div>
+      <div id="lista-mis-productos" class="lista-productos">
+        <!-- Aquí inyectaremos las tarjetas vía JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-simple">
+    <p>&copy; 2025 Tienda de Subastas. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="js/misProductos.js"></script>
+</body>
+</html>

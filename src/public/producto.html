@@ -1,72 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Detalle de Subasta</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="UTF-8" />
+  <title>Detalle de Subasta - Tienda Subastas</title>
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome (para iconos) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="css/producto.css" />
 </head>
 <body>
-  <!-- HEADER sticky con logo y acciones -->
-  <header>
-    <div class="logo">
-      <img src="/assets/logo.png" alt="Logo" class="logo-img">
+  <!-- HEADER sticky -->
+  <header class="main-header">
+    <div class="logo-container">
+      <a href="index.html"><img src="uploads/logo-removebg-preview.png" alt="Logo Biddable" class="logo-img" /></a>
       <span class="logo-text">Tienda Subastas</span>
     </div>
-    <div class="header-acciones">
-      <a href="/" class="btn-volver">← Volver</a>
-      <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+
+    <div class="header-actions">
+      <a href="/" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </button>
     </div>
   </header>
 
-  <main>
-    <!-- Detalles del producto -->
-    <header id="detalle-header">
-      <h1 id="titulo"></h1>
-      <p id="descripcion"></p>
-    </header>
+  <main class="main-content">
+    <section class="detalle-container">
+      <section class="detalle-imagenes">
+        <div class="imagen-principal" id="imagen-principal">
+          <!-- Imagen principal grande -->
+        </div>
+        <div class="thumbnails" id="thumbnails">
+          <!-- Miniaturas -->
+        </div>
+      </section>
 
-    <!-- Galería de imágenes o placeholder -->
-    <section id="galeria">
-      <div id="imagenes-producto"></div>
-    </section>
+      <section class="detalle-info">
+        <h1 id="titulo" class="titulo-subasta"></h1>
+        <p id="descripcion" class="descripcion-subasta"></p>
+        <p class="numero-subasta">N.º <span id="numero-subasta"></span></p>
 
-    <!-- Mensaje de estado (Subasta cerrada) -->
-    <section id="mensaje-estado">
-      <!-- Se rellenará dinámicamente si aplica -->
-    </section>
+        <div class="estado-subasta" id="estado-subasta">
+          <!-- Ejemplo: Cierra en 4d 1h 27m 39s -->
+        </div>
 
-    <!-- Detalles adicionales -->
-    <section id="detalles">
-      <p><strong>Precio inicial:</strong> €<span id="precio-inicial"></span></p>
-      <p><strong>Vendedor:</strong> <span id="vendedor"></span></p>
-      <p><strong>Finaliza:</strong> <span id="expiracion"></span></p>
-      <p><strong>Estado:</strong> <span id="estado"></span></p>
-    </section>
+        <div class="puja-actual">
+          <div class="puja-label">PUJA ACTUAL</div>
+          <div class="puja-monto" id="puja-actual">€ 0</div>
+          <div class="precio-reserva" id="precio-reserva">Precio de reserva no alcanzado</div>
+        </div>
 
-    <!-- Listado de pujas -->
-    <section id="pujas">
-      <h2>Pujas</h2>
-      <ul id="lista-pujas"></ul>
-    </section>
+        <div class="seleccion-experto">
+          <div class="experto-icono"><i class="fas fa-user-check"></i></div>
+          <div>
+            <span>Seleccionado por <strong id="experto-nombre">Robin Goyeux</strong></span>
+            <span class="etiqueta-experto">Experto</span>
+          </div>
+        </div>
 
-    <!-- Formulario de nueva puja -->
-    <section id="nueva-puja">
-      <h2>Hacer una puja</h2>
-      <form id="form-puja">
-        <label>
-          Cantidad (€):
-          <input type="number" id="cantidad" required min="0.01" step="0.01">
-        </label>
-        <button type="submit">Pujar</button>
-      </form>
-      <p id="error-puja" style="color:red;"></p>
+        <div class="estimacion">
+          <i class="fas fa-tag"></i>
+          <span>Estimación € <span id="estimacion-min">500</span> – € <span id="estimacion-max">550</span></span>
+        </div>
+
+        <div class="botones-puja">
+          <button class="btn-puja-opcion" data-amount="420">€ 420</button>
+          <button class="btn-puja-opcion" data-amount="440">€ 440</button>
+          <button class="btn-puja-opcion" data-amount="450">€ 450</button>
+        </div>
+
+        <form id="form-puja" class="form-puja">
+          <input
+            type="number"
+            id="cantidad"
+            name="cantidad"
+            placeholder="€ Introduce tu puja"
+            min="0.01"
+            step="0.01"
+            required
+          />
+          <button type="submit" class="btn-pujar">Pujar</button>
+          <button type="button" id="btn-max-puja" class="btn-max-puja">Fijar puja máx</button>
+        </form>
+
+        <div class="info-proteccion">
+          <i class="fas fa-shield-alt"></i>
+          <span>Tarifa de la <a href="#">Protección del Comprador</a>: 9% + € 3</span>
+        </div>
+
+        <div class="info-envio">
+          <i class="fas fa-truck"></i>
+          <span>22 € desde Francia, llega en 6-8 días</span>
+        </div>
+
+        <div class="opciones-pago">
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-apple-pay"></i>
+          <i class="fab fa-google-pay"></i>
+          <i class="fab fa-paypal"></i>
+          <i class="fas fa-university"></i>
+        </div>
+      </section>
     </section>
   </main>
 
-  <!-- FOOTER simple -->
-  <footer>
+  <footer class="footer-simple">
     <p>&copy; 2025 Tienda de Subastas. Todos los derechos reservados.</p>
   </footer>
 
